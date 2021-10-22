@@ -1,0 +1,156 @@
+/*Name:Shweta Bajpai
+  Roll no:SEITA05
+  String operations*/
+
+#include <stdio.h>
+#include<string.h>
+
+void substring(char*);
+void palindrome(char*);
+void compare(char*);
+void reverse(char*);
+
+int main()
+{
+  int opt;
+  char instring[100];
+  char *pinstring;
+  pinstring = instring;
+
+  printf("Enter a string on which you want to perform operations: ");
+  scanf("%s", instring);
+
+  while(1)
+  {
+    printf("\n\nMAIN MENU:\n1. Substring\n2. Palindrome\n3. compare\n4. Length\n5. Reverse\n6. Exit\n\nOption: ");
+    scanf("%d", &opt);
+
+    switch(opt)
+    {
+      case 1:
+      substring(pinstring);
+      break;
+
+      case 2:
+      palindrome(pinstring);
+      break;
+
+      case 3:
+      compare(pinstring);
+      break;
+
+      case 4:
+      
+      
+      printf("The Length of string is:%d",strlen(pinstring));
+      break;
+
+      case 5:
+      reverse(pinstring);
+      break;
+
+      case 6:
+      printf("Thank You\n\nExiting Program.....");
+      goto out;
+      break;
+
+      default:
+      printf("Please enter valid option !!!");
+      break;
+    }
+  }
+  out:;
+}
+
+void substring(char *str1)
+{
+  int strt, end;
+  char substr[30];
+  printf("\nEnter the start and end index\nStart: ");
+  scanf("%d", &strt);
+  printf("End: ");
+  scanf("%d", &end);
+
+  for(int i = strt; i <= end; i++)
+  {
+    substr[i-strt] = *(str1 + i);
+  }
+
+  printf("\nThe substring is: %s", substr);
+}
+
+void reverse(char *str5)
+{
+  int length = 0;
+  char revstr[30];
+
+  for(int i = 0; str5[i] != '\0'; i++ )
+  {
+    length++;
+  }
+
+  printf("\nThe reverse of the string is: ");
+  for(int j = 0; j <= length; j++)
+  {
+    revstr[j] = *(str5+length-j);
+    printf("%c", revstr[j]);
+  }
+
+}
+
+void palindrome(char *str2)
+{
+  int length = 0;
+  char revstr[30];
+  char *revptr, *fwdptr;
+
+  for(int i = 0; str2[i] != '\0'; i++ )
+  {
+    length++;
+  }
+
+  fwdptr = str2;
+  revptr = fwdptr + length - 1;
+
+  for (fwdptr = str2 ; revptr >= fwdptr;)
+  {
+    if (*revptr == *fwdptr)
+    {
+      revptr--;
+      fwdptr++;
+    }
+
+    else
+    break;
+  }
+
+  if (fwdptr > revptr)
+    printf("The string is Palindrome");
+  else
+    printf("The string is not Palindrome");
+}
+
+void compare(char *str3)
+{
+  char cmpstr[30];
+  char *cmpptr;
+  cmpptr = cmpstr;
+
+  printf("Enter the string you want to compare: ");
+  scanf("%s", cmpstr);
+
+  while(*str3==*cmpptr)
+   {
+      if ( *str3 == '\0' || *cmpptr == '\0' )
+      break;
+      str3++;
+      cmpptr++;
+   }
+
+   if( *str3 == '\0' && *cmpptr == '\0' )
+      printf("The given strings are same");
+   else
+      printf("The given strings are different");
+}
+
+
